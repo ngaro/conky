@@ -1,0 +1,10 @@
+conky.config = {
+    out_to_x = false,
+    out_to_stderr = true
+}
+
+conky.text = [[
+foo
+${weather http://tgftp.nws.noaa.gov/data/observations/metar/stations/ EBAW temperature}
+bar
+]]
