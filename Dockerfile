@@ -25,6 +25,7 @@ RUN apt-get update \
        libsystemd-dev \
        libxml2-dev \
        tolua++
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -qy docbook2x vim valgrind gdb
 
 COPY . /conky
 WORKDIR /conky/build
@@ -32,6 +33,7 @@ ARG X11=yes
 
 RUN sh -c 'if [ "$X11" = "yes" ] ; then \
     cmake \
+        -DMAINTAINER_MODE=ON \
         -DBUILD_MYSQL=ON \
         -DBUILD_LUA_CAIRO=ON \
         -DBUILD_LUA_IMLIB2=ON \
@@ -49,6 +51,7 @@ RUN sh -c 'if [ "$X11" = "yes" ] ; then \
         ../ \
       ; else \
     cmake \
+        -DMAINTAINER_MODE=ON \
         -DBUILD_X11=OFF \
         -DBUILD_MYSQL=ON \
         -DBUILD_LUA_CAIRO=ON \
@@ -65,35 +68,11 @@ RUN sh -c 'if [ "$X11" = "yes" ] ; then \
         -DBUILD_JOURNAL=ON \
         -DBUILD_RSS=ON \
         ../ \
-      ; fi' \
-  && make -j5 all \
-  && make -j5 install \
-  && apt-get remove -y \
-       cmake \
-       git \
-       g++ \
-       libimlib2-dev \
-       libxext-dev \
-       libxft-dev \
-       libxdamage-dev \
-       libxinerama-dev \
-       libmysqlclient-dev \
-       libical-dev \
-       libircclient-dev \
-       libcairo2-dev \
-       libmicrohttpd-dev \
-       ncurses-dev \
-       liblua5.1-dev \
-       librsvg2-dev \
-       audacious-dev \
-       libaudclient-dev \
-       libxmmsclient-dev \
-       libpulse-dev \
-       libcurl4-gnutls-dev \
-       libsystemd-dev \
-       libxml2-dev \
-       tolua++ \
-  && rm -rf /var/lib/apt/lists/* \
-  && rm -rf /conky
+      ; fi'
+CMD /bin/bash
 
-CMD conky
+#docker build --tag=conky-dev .
+#docker run --name conkycode --rm -ti --net=host -e DISPLAY -v ~/.Xauthority:/root/.Xauthority --cap-add=SYS_PTRACE --security-opt seccomp=unconfined conky-dev
+#make -j5 all
+#src/conky -c ../.conkyrc -i5
+#make -j5 install
