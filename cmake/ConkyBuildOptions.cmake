@@ -52,7 +52,7 @@ mark_as_advanced(RELEASE)
 
 option(MAINTAINER_MODE "Enable maintainer mode (builds docs)" false)
 
-option(BUILD_I18N  "Enable if you want internationalization support" true)
+option(BUILD_I18N  "Enable if you want internationalization support" false)
 if(BUILD_I18N)
 	set(LOCALE_DIR "${CMAKE_INSTALL_PREFIX}/share/locale" CACHE STRING "Directory containing the locales")
 endif(BUILD_I18N)
@@ -81,12 +81,12 @@ set(MAX_NET_INTERFACES "64" CACHE STRING "Maximum number of network devices")
 # Platform specific options
 # Linux only
 if(OS_LINUX)
-	option(BUILD_PORT_MONITORS "Build TCP portmon support" true)
-	option(BUILD_IBM "Support for IBM/Lenovo notebooks" true)
-	option(BUILD_HDDTEMP "Support for hddtemp" true)
+	option(BUILD_PORT_MONITORS "Build TCP portmon support" false)
+	option(BUILD_IBM "Support for IBM/Lenovo notebooks" false)
+	option(BUILD_HDDTEMP "Support for hddtemp" false)
 	# nvidia may also work on FreeBSD, not sure
 	option(BUILD_NVIDIA "Enable nvidia support" false)
-	option(BUILD_IPV6 "Enable if you want IPv6 support" true)
+	option(BUILD_IPV6 "Enable if you want IPv6 support" false)
 else(OS_LINUX)
 	set(BUILD_PORT_MONITORS false)
 	set(BUILD_IBM false)
@@ -105,37 +105,37 @@ endif(OS_DARWIN)
 
 option(BUILD_WLAN "Enable wireless support" false)
 
-option(BUILD_BUILTIN_CONFIG "Enable builtin default configuration" true)
+option(BUILD_BUILTIN_CONFIG "Enable builtin default configuration" false)
 
-option(BUILD_IOSTATS "Enable disk I/O stats" true)
+option(BUILD_IOSTATS "Enable disk I/O stats" false)
 
-option(BUILD_OLD_CONFIG "Enable support for the old syntax of configurations" true)
+option(BUILD_OLD_CONFIG "Enable support for the old syntax of configurations" false)
 
-option(BUILD_MATH "Enable math support" true)
+option(BUILD_MATH "Enable math support" false)
 
-option(BUILD_NCURSES "Enable ncurses support" true)
+option(BUILD_NCURSES "Enable ncurses support" false)
 if(BUILD_NCURSES)
 	option(LEAKFREE_NCURSES "Enable to hide false ncurses-memleaks in valgrind (works only when ncurses is compiled with --disable-leaks)" false)
 else(BUILD_NCURSES)
 	set(LEAKFREE_NCURSES false CACHE BOOL "Enable to hide false ncurses-memleaks in valgrind (works only when ncurses is compiled with --disable-leaks)" FORCE)
 endif(BUILD_NCURSES)
 
-option(BUILD_X11 "Build X11 support" true)
+option(BUILD_X11 "Build X11 support" false)
 if(BUILD_X11)
-	option(OWN_WINDOW "Enable own_window support" true)
+	option(OWN_WINDOW "Enable own_window support" false)
 
 	# Mac Fix
 	if(OS_DARWIN)
 		option(BUILD_XDAMAGE "Build Xdamage support" false)
 	else(OS_DARWIN)
-		option(BUILD_XDAMAGE "Build Xdamage support" true)
+		option(BUILD_XDAMAGE "Build Xdamage support" false)
 	endif(OS_DARWIN)
 
-	option(BUILD_XINERAMA "Build Xinerama support" true)
-	option(BUILD_XDBE "Build Xdbe (double-buffer) support" true)
-	option(BUILD_XFT "Build Xft (freetype fonts) support" true)
-	option(BUILD_IMLIB2 "Enable Imlib2 support" true)
-	option(BUILD_XSHAPE "Enable Xshape support" true)
+	option(BUILD_XINERAMA "Build Xinerama support" false)
+	option(BUILD_XDBE "Build Xdbe (double-buffer) support" false)
+	option(BUILD_XFT "Build Xft (freetype fonts) support" false)
+	option(BUILD_IMLIB2 "Enable Imlib2 support" false)
+	option(BUILD_XSHAPE "Enable Xshape support" false)
 else(BUILD_X11)
 	set(OWN_WINDOW false CACHE BOOL "Enable own_window support" FORCE)
 	set(BUILD_XDAMAGE false CACHE BOOL "Build Xdamage support" FORCE)
@@ -147,7 +147,7 @@ else(BUILD_X11)
 endif(BUILD_X11)
 
 if(OWN_WINDOW)
-	option(BUILD_ARGB "Build ARGB (real transparency) support" true)
+	option(BUILD_ARGB "Build ARGB (real transparency) support" false)
 else(OWN_WINDOW)
 	set(BUILD_ARGB false CACHE BOOL "Build ARGB (real transparency) support" FORCE)
 endif(OWN_WINDOW)
@@ -160,26 +160,26 @@ option(BUILD_AUDACIOUS "Build audacious (music player) support" false)
 
 option(BUILD_BMPX "Build BMPx (music player) support" false)
 
-option(BUILD_MPD "Enable if you want MPD (music player) support" true)
+option(BUILD_MPD "Enable if you want MPD (music player) support" false)
 
 option(BUILD_MYSQL "Enable if you want MySQL support" false)
 
-option(BUILD_MOC "Enable if you want MOC (music player) support" true)
+option(BUILD_MOC "Enable if you want MOC (music player) support" false)
 
 option(BUILD_XMMS2 "Enable if you want XMMS2 (music player) support" false)
 
-option(BUILD_EVE "Enable if you want Eve-Online skill monitoring support" true)
+option(BUILD_EVE "Enable if you want Eve-Online skill monitoring support" false)
 
 option(BUILD_CURL "Enable if you want Curl support" false)
 
 option(BUILD_RSS "Enable if you want RSS support" false)
 
-option(BUILD_WEATHER_METAR "Enable METAR weather support" true)
+option(BUILD_WEATHER_METAR "Enable METAR weather support" false)
 if(BUILD_WEATHER_METAR OR BUILD_RSS)
-	set(BUILD_CURL true)
+	set(BUILD_CURL false)
 endif(BUILD_WEATHER_METAR OR BUILD_RSS)
 
-option(BUILD_APCUPSD "Enable APCUPSD support" true)
+option(BUILD_APCUPSD "Enable APCUPSD support" false)
 
 option(BUILD_ICAL "Enable if you want iCalendar (RFC 5545) support" false)
 
@@ -192,7 +192,7 @@ endif(BUILD_HTTP)
 
 option(BUILD_ICONV "Enable iconv support" false)
 
-option(BUILD_CMUS "Enable support for cmus music player" true)
+option(BUILD_CMUS "Enable support for cmus music player" false)
 
 option(BUILD_JOURNAL "Enable support for reading from the systemd journal" false)
 

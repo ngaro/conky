@@ -76,13 +76,9 @@
 
 #cmakedefine BUILD_HDDTEMP 1
 
-#cmakedefine BUILD_EVE 1
-
 #cmakedefine BUILD_LIBXML2 1
 
-#cmakedefine BUILD_CURL 1
 
-#cmakedefine BUILD_WEATHER_METAR 1
 
 #cmakedefine BUILD_IMLIB2 1
 
@@ -91,9 +87,6 @@
 #cmakedefine BUILD_BUILTIN_CONFIG 1
 
 #cmakedefine BUILD_OLD_CONFIG 1
-
-#cmakedefine BUILD_NCURSES 1
-#cmakedefine LEAKFREE_NCURSES 1
 
 #cmakedefine BUILD_APCUPSD 1
 
@@ -126,8 +119,6 @@
 #endif
 
 #cmakedefine BUILD_IBM 1
-
-#cmakedefine BUILD_RSS 1
 
 #cmakedefine BUILD_CMUS 1
 
